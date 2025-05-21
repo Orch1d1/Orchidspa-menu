@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Orchid Ayurveda Spa Menu</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #fff9f8;
+      color: #4b2e39;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: url('https://images.unsplash.com/photo-1615554968586-6f4b9a2a7d61') no-repeat center center/cover;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      background-color: rgba(75, 46, 57, 0.6);
+      padding: 1rem 2rem;
+      border-radius: 10px;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .section {
+      margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.6s ease;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section h2 {
+      border-bottom: 2px solid #da627d;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      color: #b23b66;
+    }
+
+    .service {
+      margin-bottom: 1rem;
+      cursor: pointer;
+      transition: transform 0.5s ease, background 0.3s;
+      position: relative;
+      z-index: 1;
+    }
+
+    .service:hover {
+      background: #fbd5dd;
+      border-radius: 8px;
+    }
+
+    .service.open {
+      transform: scale(1.05);
+      z-index: 10;
+    }
+
+    .service-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem;
+    }
+
+    .service-desc {
+      font-size: 0.95rem;
+      margin-top: 0.2rem;
+      color: #5b3b4a;
+      padding: 0 0.5rem 1rem 0.5rem;
+    }
+
+    .details {
+      display: none;
+      padding: 0.5rem;
+      background-color: #fef2f5;
+      border-radius: 8px;
+      margin-top: 0.5rem;
+      transform-origin: top center;
+      animation: zoomIn 0.4s ease forwards;
+    }
+
+    @keyframes zoomIn {
+      from {
+        transform: scale(0.9);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .details img {
+      max-width: 50%;
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #fbd5dd;
+      color: #772848;
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Click to expand details
+      document.querySelectorAll(".service").forEach(service => {
+        const detail = service.querySelector(".details");
+        service.addEventListener("click", () => {
+          const isOpen = detail.style.display === "block";
+          document.querySelectorAll(".details").forEach(d => d.style.display = "none");
+          document.querySelectorAll(".service").forEach(s => s.classList.remove("open"));
+          if (!isOpen) {
+            detail.style.display = "block";
+            service.classList.add("open");
+          }
+        });
+      });
+
+      // Scroll-triggered animation
+      const sections = document.querySelectorAll('.section');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+
+      sections.forEach(section => {
+        observer.observe(section);
+      });
+    });
+  </script>
+</head>
+
+<body>
+
+  <header>
+    <h1>Orchid Ayurveda</h1>
+  </header>
+
+  <main>
+    <section class="section">
+      <h2>Massage & Steam Therapies</h2>
+      <div class="service">
+        <div class="service-title">Marma + Steam <span>₹3000 / 90min</span></div>
+        <div class="service-desc">A healing therapy combining Marma point stimulation and herbal steam.</div>
+        <div class="details">
+          <img src="C:\Users\ACER\Downloads\Ayur\images\marma-therapy.jpg" alt="Marma + Steam">
+          <p>Stimulates energy points for holistic rejuvenation followed by herbal steam for detox.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-title">Abhayangam <span>₹2000 / 60min or ₹3000 / 90min</span></div>
+        <div class="service-desc">Traditional warm oil massage to balance doshas.</div>
+        <div class="details">
+          <img src="C:\Users\ACER\Downloads\Ayur\images\abhyangam.jpg" alt="Abhayangam">
+          <p>Promotes circulation, relaxes muscles, and calms the mind with therapeutic strokes.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-title">Abhayangam + Steam <span>₹2500 / 75min or ₹3000 / 105min</span></div>
+        <div class="service-desc">Enhanced Abhayangam with detoxifying herbal steam.</div>
+        <div class="details">
+          <img src="C:\Users\ACER\Downloads\Ayur\images\Ayurvedic-Steam-Bath.jpg" alt="Abhayangam + Steam">
+          <p>Improves lymphatic drainage and deepens relaxation post massage.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-title">Udhwarthanam <span>₹2500 / 60min</span></div>
+        <div class="service-desc">Dry herbal powder massage for exfoliation and cellulite reduction.</div>
+        <div class="details">
+          <img src="C:\Users\ACER\Downloads\Ayur\images\Udvartanam.jpg" alt="Udhwarthanam">
+          <p>Stimulates fat metabolism, tones muscles and rejuvenates skin.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-title">Lepa Massage (Oil/Buttermilk) <span>₹3000 / 60min</span></div>
+        <div class="service-desc">Topical herbal paste massage with cooling or warming effect.</div>
+        <div class="details">
+          <img src="C:\Users\ACER\Downloads\Ayur\images\lepam.jpg" alt="Lepa Massage">
+          <p>Helps in treating inflammation, skin disorders and joint stiffness.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Drip Therapies (Dhara)</h2>
+      <div class="service">
+        <div class="service-title">Shirodhara (Oil) <span>₹3000 / 60min</span></div>
+        <div class="service-desc">Warm oil gently streamed over the forehead for deep mental relaxation.</div>
+        <div class="details">
+          <img src="#" alt="Shirodhara">
+          <p>Calms the mind, helps with insomnia, anxiety and hormonal imbalance.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-title">Ksheeradhara (Milk) <span>₹2000–₹3500 / 60min</span></div>
+        <div class="service-desc">Cooling milk therapy to calm the nervous system.</div>
+        <div class="details">
+          <img src="#" alt="Ksheeradhara">
+          <p>Effective for stress, headaches, and skin conditions.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-title">Takradhara <span>₹2000–₹3500 / 60min</span></div>
+        <div class="service-desc">Therapeutic pouring of medicated buttermilk over the forehead.</div>
+        <div class="details">
+          <img src="#" alt="Takradhara">
+          <p>Promotes mental clarity and eases skin conditions and tension.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Kizhi Therapies</h2>
+      <div class="service">
+        <div class="service-title">Elakkizhi / Podikkizhi <span>₹2500 / 60min</span></div>
+        <div class="service-desc">Heated herbal poultices for pain relief and rejuvenation.</div>
+        <div class="details">
+          <img src="#" alt="Elakkizhi">
+          <p>Helps relieve joint pain, improves circulation and strengthens tissues.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-title">Njavara Kizhi <span>₹3000 / 60min</span></div>
+        <div class="service-desc">Rice bolus therapy to rejuvenate and nourish tissues.</div>
+        <div class="details">
+          <img src="#" alt="Njavara Kizhi">
+          <p>Promotes strength and enhances muscle tone. Great for neuromuscular disorders.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-title">Pizhichil (Oil) <span>₹3500 / 60min</span></div>
+        <div class="service-desc">Continuous oil flow with massage for ultimate rejuvenation.</div>
+        <div class="details">
+          <img src="#" alt="Pizhichil">
+          <p>Combines heat and oil to detoxify and strengthen body systems.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-title">Chavitti Uzhichil <span>₹4000 / 60min</span></div>
+        <div class="service-desc">Foot massage therapy applying pressure with therapist’s feet.</div>
+        <div class="details">
+          <img src="#" alt="Chavitti Uzhichil">
+          <p>Deep muscle therapy traditionally used by Kalaripayattu martial artists.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Cleansing & Nasal Therapies</h2>
+      <div class="service">
+        <div class="service-title">Nasyam <span>₹1200 / 30min</span></div>
+        <div class="service-desc">Nasal cleansing and medication administration.</div>
+        <div class="details">
+          <img src="#" alt="Nasyam">
+          <p>Clears sinuses, improves breathing and benefits ENT-related ailments.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-title">Karnapuranam <span>₹1500 / 30min</span></div>
+        <div class="service-desc">Ear oil therapy to relieve tension and nourish ear canals.</div>
+        <div class="details">
+          <img src="#" alt="Karnapuranam">
+          <p>Reduces earaches, improves hearing and calms nervous system.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-title">Snehavasthi <span>₹1200</span></div>
+        <div class="service-desc">Medicated oil enema therapy.</div>
+        <div class="details">
+          <img src="#" alt="Snehavasthi">
+          <p>Lubricates colon, helps with chronic constipation and Vata disorders.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-title">Kashayavasthi <span>₹1500</span></div>
+        <div class="service-desc">Medicated decoction enema therapy.</div>
+        <div class="details">
+          <img src="#" alt="Kashayavasthi">
+          <p>Detoxifies intestines, balances doshas, improves metabolism.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-title">Vamanam <span>₹2000</span></div>
+        <div class="service-desc">Induced emesis for detox and Kapha balance.</div>
+        <div class="details">
+          <img src="#" alt="Vamanam">
+          <p>A Panchakarma therapy for eliminating toxins from stomach and lungs.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Focused Area Treatments</h2>
+      <div class="service">
+        <div class="service-title">Area Focused Massage <span>₹1400 / 30min</span></div>
+        <div class="service-desc">Customized massage on target areas for relief and relaxation.</div>
+        <div class="details">
+          <img src="#" alt="Focused Massage">
+          <p>Perfect for back, shoulders, or legs to relieve tension and soreness.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-title">Area Focused Kizhi <span>₹1600 / 30min</span></div>
+        <div class="service-desc">Localized herbal pouch therapy.</div>
+        <div class="details">
+          <img src="#" alt="Focused Kizhi">
+          <p>Great for joint or muscle stiffness and pain management.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-title">Leg Massage <span>₹1600 / 45min</span></div>
+        <div class="service-desc">Ayurvedic massage focused on lower limbs.</div>
+        <div class="details">
+          <img src="#" alt="Leg Massage">
+          <p>Improves blood circulation, reduces swelling and relaxes muscles.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-title">Kati / Janu / Griva Vasthi <span>₹1500 / 30min</span></div>
+        <div class="service-desc">Localized oil pooling treatment for spine, knees, or neck.</div>
+        <div class="details">
+          <img src="#" alt="Vasthi">
+          <p>Relieves chronic pain, inflammation and nourishes joints.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Ayurvedic Wellness Packages</h2>
+      <div class="service">
+        <div class="service-title">Body Detox Ayurveda Panchakarma <span>120min</span></div>
+        <div class="service-desc">Complete detoxification therapy to cleanse and rejuvenate.</div>
+        <div class="details">
+          <img src="#" alt="Detox Package">
+          <p>Combines multiple Panchakarma methods to eliminate toxins and boost immunity.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-title">Ayurveda Rejuvenation Package <span>120min</span></div>
+        <div class="service-desc">Restores energy through specialized therapies.</div>
+        <div class="details">
+          <img src="#" alt="Rejuvenation Package">
+          <p>Custom massages and treatments to enhance vitality and promote wellness.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-title">Stress Relief Package <span>120min</span></div>
+        <div class="service-desc">Perfect for relieving stress and anxiety.</div>
+        <div class="details">
+          <img src="#" alt="Stress Relief Package">
+          <p>Combines calming therapies like Shirodhara and Abhyanga for deep relaxation.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-title">Weight Management Package <span>120min</span></div>
+        <div class="service-desc">Holistic weight care through Ayurvedic approach.</div>
+        <div class="details">
+          <img src="#" alt="Weight Management">
+          <p>Therapies like Udwarthanam and herbal steam to boost metabolism and reduce fat.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-title">Migraine Relief Package <span>120min</span></div>
+        <div class="service-desc">Effective natural management of migraines.</div>
+        <div class="details">
+          <img src="#" alt="Migraine Relief">
+          <p>Uses Shirodhara and Nasyam to reduce frequency and intensity of migraines.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-title">Psoriasis Management Package <span>120min</span></div>
+        <div class="service-desc">Natural healing and care for psoriasis.</div>
+        <div class="details">
+          <img src="#" alt="Psoriasis Care">
+          <p>Combines detox, herbal applications, and diet suggestions for lasting relief.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-title">Arthritis & Pain Management Package <span>120min</span></div>
+        <div class="service-desc">Therapies to reduce joint pain and improve mobility.</div>
+        <div class="details">
+          <img src="#" alt="Pain Management">
+          <p>Includes kizhi, vasthi, and tailored massage sessions.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-title">Mind & Body Relaxation Package <span>120min</span></div>
+        <div class="service-desc">Balance physical and emotional wellness.</div>
+        <div class="details">
+          <img src="#" alt="Mind & Body">
+          <p>Combines full-body massage, guided relaxation and steam therapy for harmony.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2025 Orchid Ayurveda • All Rights Reserved
+  </footer>
+
+</body>
+</html>
+
